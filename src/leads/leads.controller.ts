@@ -10,6 +10,7 @@ import {
   Patch,
   Post,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 
 import {
@@ -24,12 +25,14 @@ import { AiService } from '../ai/ai.service';
 import { CreateLeadDto } from './dto/create-lead.dto';
 import { UpdateLeadDto } from './dto/update-lead.dto';
 import { AiSummaryFilterDto, FilterLeadDto } from './dto/filter-lead.dto';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 import { Lead } from './entities/lead.entity';
 import { LeadsService } from './leads.service';
 
 @ApiTags('Leads')
 @ApiBearerAuth()
+@UseGuards(JwtAuthGuard)
 @Controller('leads')
 export class LeadsController {
   constructor(
